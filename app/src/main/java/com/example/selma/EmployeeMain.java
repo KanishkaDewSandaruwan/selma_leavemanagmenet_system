@@ -19,6 +19,9 @@ public class EmployeeMain extends AppCompatActivity {
     TextView name, startDate, EndDate, Status;
     Leave leave;
     List<Leave> leaveList;
+    List<Employee> employeeList;
+    Employee employee;
+    TextView btnMyProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,10 @@ public class EmployeeMain extends AppCompatActivity {
         context = this;
         dbHandler = new DBHandler(context);
         leave = new Leave();
+        employee = new Employee();
+
         leaveList = new ArrayList<>();
+        employeeList = new ArrayList<>();
 
         Button btnAddNewLeave, leaveHistory;
         btnAddNewLeave = findViewById(R.id.btnAddNewLeave);
@@ -43,12 +49,38 @@ public class EmployeeMain extends AppCompatActivity {
         EndDate = findViewById(R.id.txtLeaveEndDate);
         Status = findViewById(R.id.txtLeaveStatus);
 
-        leaveList = dbHandler.getLeaveByID(id);
-        leave = leaveList.get(0);
+        btnMyProfile = findViewById(R.id.txtbtnProfile);
 
-        startDate.setText(leave.getLeave_start_date());
-        EndDate.setText(leave.getLeave_end_date());
-        Status.setText(leave.getAccept());
+        btnMyProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(getApplicationContext(), Profile.class);
+                intent1.putExtra("EMPID", EMP_ID);
+                startActivity(intent1);
+            }
+        });
+
+        employeeList = dbHandler.getEmployeeByID(id);
+        if(!employeeList.isEmpty()){
+            employee = employeeList.get(0);
+            name.setText("Hello! " + employee.getName());
+        }
+
+        leaveList = dbHandler.getLeaveByID(id);
+        if(!leaveList.isEmpty()){
+
+            leave = leaveList.get(0);
+            if(!leave.getAccept().isEmpty()){
+                startDate.setText("Start Date : "+ leave.getLeave_start_date());
+                EndDate.setText("End Date : " + leave.getLeave_end_date());
+                Status.setText("Request Status : " + leave.getAccept());
+            }
+        }else{
+            name.setText("Your Leave List is Empty");
+            startDate.setText("");
+            EndDate.setText("");
+            Status.setText("Welcome to SELMA Levae System");
+        }
 
 
 

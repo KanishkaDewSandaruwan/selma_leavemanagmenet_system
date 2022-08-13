@@ -133,7 +133,7 @@ public class DBHandler extends SQLiteOpenHelper {
         List<Leave> leaveList = new ArrayList();
 
         SQLiteDatabase db = getReadableDatabase();
-        String get_semester_query = "SELECT * FROM "+LEAVE_TABLE_NAME;
+        String get_semester_query = "SELECT * FROM "+LEAVE_TABLE_NAME+" WHERE "+ACCEPT+" = 'Pending'";
         Cursor cursor = db.rawQuery(get_semester_query,null);
 
         if (cursor.moveToFirst()){
@@ -156,6 +156,12 @@ public class DBHandler extends SQLiteOpenHelper {
     public void deleteEmployee(int id){
         SQLiteDatabase db = getWritableDatabase();
         db.delete(EMPLOYEE_TABLE_NAME,EMPID+" = ? ",new String[]{String.valueOf(id)});
+        db.delete(LEAVE_TABLE_NAME,LEAVE_EMPID+" = ? ",new String[]{String.valueOf(id)});
+    }
+
+    public void deleteLeave(int id){
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(LEAVE_TABLE_NAME,LEAVEID+" = ? ",new String[]{String.valueOf(id)});
     }
 
     public List<Leave> getLeaveByID(int position){
@@ -182,6 +188,35 @@ public class DBHandler extends SQLiteOpenHelper {
             }while (cursor.moveToNext());
         }
         return leaveList;
+    }
+
+    public List<Employee> getEmployeeByID(int position){
+
+
+        List<Employee> employeeList = new ArrayList<>();
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.query(EMPLOYEE_TABLE_NAME,new String[]{EMPID, EMPNUMBER, NAME, NIC, ADDRESS, EMAIL, PHONE},EMPID + " = ?",new String[]{String.valueOf(position)},null,null,null);
+
+
+        if (cursor.moveToFirst()){
+            do {
+                Employee employee = new Employee();
+
+                employee.setEmp_id(cursor.getInt(0));
+                employee.setEmp_number(cursor.getString(1));
+                employee.setName(cursor.getString(2));
+                employee.setNic(cursor.getString(3));
+                employee.setAddress(cursor.getString(4));
+                employee.setEmail(cursor.getString(5));
+                employee.setPhonenumber(cursor.getInt(6));
+
+
+                employeeList.add(employee);
+            }while (cursor.moveToNext());
+        }
+        return employeeList;
     }
 
     public void editEmployee(Employee employee){
@@ -227,5 +262,23 @@ public class DBHandler extends SQLiteOpenHelper {
         }
 
         return result;
+    }
+
+    public void updateCancelRequest(int id){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(ACCEPT,"Cancel");
+
+        db.update(LEAVE_TABLE_NAME,contentValues,LEAVEID+" = ? ",new String[]{String.valueOf(id)});
+    }
+
+    public void updateAcceptRequest(int id){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(ACCEPT,"Accepted");
+
+        db.update(LEAVE_TABLE_NAME,contentValues,LEAVEID+" = ? ",new String[]{String.valueOf(id)});
     }
 }

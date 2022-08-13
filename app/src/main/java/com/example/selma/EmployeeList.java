@@ -81,6 +81,9 @@ public class EmployeeList extends AppCompatActivity {
                    @Override
                    public void onClick(DialogInterface dialogInterface, int i) {
 
+                       Intent intent = new Intent(context, EmployeeLeaveDetails.class);
+                       intent.putExtra("EMP_ID",employee.getEmp_number());
+                       startActivity(intent);
                    }
                });
 

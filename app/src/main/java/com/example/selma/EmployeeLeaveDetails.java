@@ -16,30 +16,30 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeLeaveHistory extends AppCompatActivity {
+public class EmployeeLeaveDetails extends AppCompatActivity {
+
 
     DBHandler dbHandler;
     Context context;
     LeaveHistoryArrayAdapter leaveHistoryArrayAdapter;
     List<Leave> leaveList;
-    ListView historylistview;
+    ListView employeeDetailslistview;
     Button back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_employee_leave_history);
+        setContentView(R.layout.activity_employee_leave_details);
 
         final Intent intent = getIntent();
         final String EMP_ID = intent.getStringExtra("EMP_ID");
         int id = Integer.parseInt(EMP_ID);
 
-        back = findViewById(R.id.btnLeaveHistoryBack);
+        back = findViewById(R.id.btnBackEmployeeLeaveDetails);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(getApplicationContext(), EmployeeMain.class);
-                intent1.putExtra("EMPID", EMP_ID);
+                Intent intent1 = new Intent(getApplicationContext(), EmployeeList.class);
                 startActivity(intent1);
             }
         });
@@ -49,11 +49,11 @@ public class EmployeeLeaveHistory extends AppCompatActivity {
         leaveList = new ArrayList<>();
         leaveList = dbHandler.getLeaveByID(id);
 
-        historylistview = findViewById(R.id.LeaveHistorylistView);
+        employeeDetailslistview = findViewById(R.id.listViewLeaveDetails);
         leaveHistoryArrayAdapter = new LeaveHistoryArrayAdapter(context,R.layout.one_leave_history,leaveList);
-        historylistview.setAdapter(leaveHistoryArrayAdapter);
+        employeeDetailslistview.setAdapter(leaveHistoryArrayAdapter);
 
-        historylistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        employeeDetailslistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 final Leave leave = leaveList.get(position);
@@ -64,7 +64,7 @@ public class EmployeeLeaveHistory extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dbHandler.deleteLeave(leave.getLeave_id());
-                        Intent intent1 = new Intent(getApplicationContext(), EmployeeLeaveHistory.class);
+                        Intent intent1 = new Intent(getApplicationContext(), EmployeeLeaveDetails.class);
                         intent1.putExtra("EMP_ID", EMP_ID);
                         startActivity(intent1);
                         Toast.makeText(context, "Leave Delete Success!", Toast.LENGTH_SHORT).show();
@@ -77,7 +77,7 @@ public class EmployeeLeaveHistory extends AppCompatActivity {
 
                         dbHandler.updateCancelRequest(leave.getLeave_id());
                         Toast.makeText(context, "Leave Request Cancel Success!", Toast.LENGTH_SHORT).show();
-                        Intent intent1 = new Intent(getApplicationContext(), EmployeeLeaveHistory.class);
+                        Intent intent1 = new Intent(getApplicationContext(), EmployeeLeaveDetails.class);
                         intent1.putExtra("EMP_ID", EMP_ID);
                         startActivity(intent1);
                     }
@@ -86,6 +86,5 @@ public class EmployeeLeaveHistory extends AppCompatActivity {
                 builder.show();
             }
         });
-
     }
 }

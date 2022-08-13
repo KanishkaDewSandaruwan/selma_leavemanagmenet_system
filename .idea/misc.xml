@@ -5,15 +5,19 @@
       <map>
         <entry key="..\:/Users/KaniYa/AndroidStudioProjects/SELMA/app/src/main/res/layout/activity_add_leave.xml" value="0.5" />
         <entry key="..\:/Users/KaniYa/AndroidStudioProjects/SELMA/app/src/main/res/layout/activity_employee_edit.xml" value="0.25" />
+        <entry key="..\:/Users/KaniYa/AndroidStudioProjects/SELMA/app/src/main/res/layout/activity_employee_leave_details.xml" value="0.22402736212056434" />
         <entry key="..\:/Users/KaniYa/AndroidStudioProjects/SELMA/app/src/main/res/layout/activity_employee_leave_history.xml" value="0.22402736212056434" />
         <entry key="..\:/Users/KaniYa/AndroidStudioProjects/SELMA/app/src/main/res/layout/activity_employee_list.xml" value="0.2" />
         <entry key="..\:/Users/KaniYa/AndroidStudioProjects/SELMA/app/src/main/res/layout/activity_employee_main.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/KaniYa/AndroidStudioProjects/SELMA/app/src/main/res/layout/activity_employee_profile.xml" value="0.22402736212056434" />
         <entry key="..\:/Users/KaniYa/AndroidStudioProjects/SELMA/app/src/main/res/layout/activity_employee_register.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/KaniYa/AndroidStudioProjects/SELMA/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/KaniYa/AndroidStudioProjects/SELMA/app/src/main/res/layout/activity_main.xml" value="0.4125" />
+        <entry key="..\:/Users/KaniYa/AndroidStudioProjects/SELMA/app/src/main/res/layout/activity_profile.xml" value="0.33" />
         <entry key="..\:/Users/KaniYa/AndroidStudioProjects/SELMA/app/src/main/res/layout/activity_staff_home.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/KaniYa/AndroidStudioProjects/SELMA/app/src/main/res/layout/activity_staff_main.xml" value="0.5" />
         <entry key="..\:/Users/KaniYa/AndroidStudioProjects/SELMA/app/src/main/res/layout/one_employee.xml" value="0.5" />
+        <entry key="..\:/Users/KaniYa/AndroidStudioProjects/SELMA/app/src/main/res/layout/one_leave.xml" value="0.5" />
         <entry key="..\:/Users/KaniYa/AndroidStudioProjects/SELMA/app/src/main/res/layout/one_leave_history.xml" value="0.2231722958529286" />
       </map>
     </option>

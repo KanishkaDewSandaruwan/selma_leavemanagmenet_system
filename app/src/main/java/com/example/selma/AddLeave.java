@@ -85,7 +85,9 @@ public class AddLeave extends AppCompatActivity {
                 Leave leave = new Leave(getStartDate, getEndDate, EMP_ID);
                 dbHandler.addLeave(leave);
                 Toast.makeText(context, "Leave Request Sent Success! Wait until Approve Leave Request", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(context, EmployeeMain.class));
+                Intent intent1 = new Intent(getApplicationContext(), EmployeeMain.class);
+                intent1.putExtra("EMPID", EMP_ID);
+                startActivity(intent1);
             }
         });
     }
