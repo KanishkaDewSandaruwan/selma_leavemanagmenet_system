@@ -71,6 +71,18 @@ public class EmployeeLeaveDetails extends AppCompatActivity {
                     }
                 });
 
+                builder.setNegativeButton("Accept Request", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        dbHandler.updateAcceptRequest(leave.getLeave_id());
+                        Toast.makeText(context, "Leave Request Accepted!", Toast.LENGTH_SHORT).show();
+                        Intent intent1 = new Intent(getApplicationContext(), EmployeeLeaveDetails.class);
+                        intent1.putExtra("EMP_ID", EMP_ID);
+                        startActivity(intent1);
+                    }
+                });
+
                 builder.setPositiveButton("Cancel Request", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
